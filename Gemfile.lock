@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: c4cc7648a24f62673dce71388acd8e0a966bd0d0
+  revision: a905527b06af6a39a91d561e9050636733845612
   branch: master
   specs:
     faker (2.14.0)
@@ -64,6 +64,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    bcrypt (3.1.16)
     bootsnap (1.4.8)
       msgpack (~> 1.0)
     builder (3.2.4)
@@ -157,6 +158,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
   faker!
