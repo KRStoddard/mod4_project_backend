@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+20.times {User.create({username: Faker::Internet.username, password: Faker::Internet.password})}
+
+100.times {Note.create({title: Faker::TvShows::Buffy.episode, content: Faker::TvShows::DrWho.quote, user_id: User.all.sample.id})}
