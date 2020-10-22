@@ -2,7 +2,7 @@ class NotesController < ApplicationController
 
     def index
         notes = Note.all.reverse
-        render json: notes
+        render :json => notes, :include => {:tags => {:only => :name}}
     end
 
     def show
@@ -10,9 +10,12 @@ class NotesController < ApplicationController
         render json: note 
     end
 
-    def create
-        user_id = User.all.sample.id 
-        note = Note.create({"title": params[:title], "content": params[:content], "user_id": user_id})
+    def create 
+        note = Note.create({"title": params[:title], "content": params[:content], "user_id": params[:user_id]})
+        params[:tags].split(', ').each do |tag| 
+            tag_id = Tag.find_or_create_by({name: tag}).id
+            NoteTag.create({"tag_id": tag_id, "note_id": note.id})
+        end
     end
 
     def update
