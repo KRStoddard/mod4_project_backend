@@ -7,7 +7,7 @@ class NotesController < ApplicationController
 
     def show
         note = Note.find(params[:id])
-        render json: note 
+        render :json => note, :include => {:tags => {:only => :name}}
     end
 
     def create 
@@ -21,6 +21,11 @@ class NotesController < ApplicationController
     def update
         note = Note.find(params[:id])
         note.update(title: params[:title], content: params[:content])
+        note.note_tags.each{|notetag| notetag.destroy}
+        params[:tags].split(', ').each do |tag| 
+            tag_id = Tag.find_or_create_by({name: tag}).id
+            NoteTag.create({"tag_id": tag_id, "note_id": note.id}) 
+        end
         render json: note
     end
 
