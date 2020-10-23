@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_10_22_163812) do
   create_table "notes", force: :cascade do |t|
     t.string "title"
     t.text "content"
+    t.text "image"
     t.integer "user_id"
   end
 

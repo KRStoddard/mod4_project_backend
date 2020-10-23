@@ -11,7 +11,7 @@ class NotesController < ApplicationController
     end
 
     def create 
-        note = Note.create({"title": params[:title], "content": params[:content], "user_id": params[:user_id]})
+        note = Note.create({"title": params[:title], "content": params[:content], "image": params[:image], "user_id": params[:user_id]})
         params[:tags].split(', ').each do |tag| 
             tag_id = Tag.find_or_create_by({name: tag}).id
             NoteTag.create({"tag_id": tag_id, "note_id": note.id})
